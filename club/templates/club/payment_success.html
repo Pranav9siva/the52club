@@ -1,0 +1,59 @@
+{% extends 'club/base.html' %}
+{% load static %}
+
+{% block title %}Welcome to The 52 Club!{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'club/payment.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="payment-page success-page">
+
+    <div class="payment-container">
+
+        <!-- Success Animation -->
+        <div class="success-icon">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+        </div>
+
+        <h1 class="success-title">YOU'RE IN.</h1>
+
+        <p class="success-name">
+            Welcome to The 52 Club, <strong>{{ member.full_name }}</strong>!
+        </p>
+
+        <p class="success-message">
+            Your registration and payment have been received.
+            Our team will verify your payment and reach out to you soon
+            with session details.
+        </p>
+
+        <div class="success-details">
+            <div class="detail-item">
+                <span class="detail-label">NAME</span>
+                <span class="detail-value">{{ member.full_name }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">EMAIL</span>
+                <span class="detail-value">{{ member.email }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">PHONE</span>
+                <span class="detail-value">{{ member.phone }}</span>
+            </div>
+        </div>
+
+        <a href="{% url 'home' %}" class="back-home-btn">
+            ← BACK TO HOME
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

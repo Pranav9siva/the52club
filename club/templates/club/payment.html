@@ -1,0 +1,203 @@
+{% extends 'club/base.html' %}
+{% load static %}
+
+{% block title %}Payment — The 52 Club{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'club/payment.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="payment-page">
+
+    <div class="payment-container">
+
+        <!-- Header -->
+        <div class="payment-header">
+            <div class="payment-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M9 12l2 2 4-4" />
+                    <circle cx="12" cy="12" r="10" />
+                </svg>
+            </div>
+            <h1>COMPLETE<br><span>PAYMENT</span></h1>
+            <p class="payment-subtitle">
+                Welcome, <strong>{{ member.full_name }}</strong>!<br>
+                Pay securely via UPI to confirm your registration.
+            </p>
+            <!-- Live Status Indicator -->
+            <div class="status-indicator">
+                <span class="pulse-dot" id="pulseDot"></span>
+                <span id="statusText">Waiting for payment...</span>
+            </div>
+        </div>
+
+        <!-- Amount Card -->
+        <div class="amount-card">
+            <p class="amount-label">REGISTRATION FEE</p>
+            <p class="amount-value">₹ {{ settings.registration_fee }}</p>
+        </div>
+
+        <!-- Pay Now Button (Razorpay Checkout) -->
+        {% if is_razorpay_configured %}
+        <button type="button" class="confirm-btn" id="payNowBtn" onclick="openRazorpay()"
+            style="background: #5cb85c; color: #fff; font-size: 16px; padding: 22px; margin-bottom: 20px; border-radius: 6px;">
+            ⚡ PAY ₹{{ settings.registration_fee }} NOW
+        </button>
+        <p class="qr-hint" style="margin-bottom: 30px;">Supports GPay, PhonePe, Paytm, UPI QR, Cards & Netbanking</p>
+        {% else %}
+        <p class="payment-note" style="color: #f0ad4e; margin-bottom: 30px;">
+            ⚠️ Razorpay keys not configured. Add your keys in Admin → Site Settings to enable auto-verified payments.
+        </p>
+        {% endif %}
+
+        <!-- Hidden Data -->
+        <input type="hidden" id="txId" value="{{ transaction_id }}">
+        <input type="hidden" id="memberId" value="{{ member.pk }}">
+        <input type="hidden" id="rzpOrderId" value="{{ razorpay_order_id }}">
+        <input type="hidden" id="rzpKeyId" value="{{ razorpay_key_id }}">
+        <input type="hidden" id="rzpAmount" value="{{ amount_in_paise }}">
+        <input type="hidden" id="memberEmail" value="{{ member.email }}">
+        <input type="hidden" id="memberName" value="{{ member.full_name }}">
+        <input type="hidden" id="memberPhone" value="{{ member.phone }}">
+
+    </div>
+
+</section>
+
+<!-- Success Modal Popup -->
+<div class="payment-modal-overlay" id="successModal">
+    <div class="payment-modal-card">
+        <div class="modal-icon">
+            <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none" />
+                <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+            </svg>
+        </div>
+        <h2 class="modal-title">PAYMENT VERIFIED!</h2>
+        <p class="modal-subtitle">
+            Thank you, <strong>{{ member.full_name }}</strong>!<br>
+            Your registration is confirmed. Redirecting...
+        </p>
+        <a href="{% url 'payment_success' member_id=member.pk %}" class="modal-action-btn">
+            VIEW REGISTRATION DETAILS →
+        </a>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<!-- Razorpay Checkout SDK -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+    const txId = document.getElementById('txId').value;
+    const memberId = document.getElementById('memberId').value;
+    let pollInterval = null;
+
+    // Start polling on page load (catches webhook-based confirmations)
+    document.addEventListener('DOMContentLoaded', function () {
+        startPaymentPolling();
+    });
+
+    // Open Razorpay Checkout Modal
+    function openRazorpay() {
+        const keyId = document.getElementById('rzpKeyId').value;
+        const orderId = document.getElementById('rzpOrderId').value;
+        const amount = document.getElementById('rzpAmount').value;
+        const email = document.getElementById('memberEmail').value;
+        const name = document.getElementById('memberName').value;
+        const phone = document.getElementById('memberPhone').value;
+
+        const options = {
+            "key": keyId,
+            "amount": amount,
+            "currency": "INR",
+            "name": "The 52 Club",
+            "description": "Club Registration Fee",
+            "handler": function (response) {
+                // Payment successful — verify signature on backend
+                document.getElementById('statusText').textContent = 'Verifying payment...';
+
+                fetch('/api/payment/verify/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        razorpay_order_id: response.razorpay_order_id,
+                        razorpay_payment_id: response.razorpay_payment_id,
+                        razorpay_signature: response.razorpay_signature,
+                        transaction_id: txId
+                    })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            triggerSuccessPopup();
+                        } else {
+                            alert('Verification failed: ' + (data.error || 'Unknown error'));
+                        }
+                    });
+            },
+            "prefill": {
+                "name": name,
+                "email": email,
+                "contact": phone
+            },
+            "theme": {
+                "color": "#000000"
+            },
+            "modal": {
+                "ondismiss": function () {
+                    console.log('Payment modal closed by user');
+                }
+            }
+        };
+
+        if (orderId) {
+            options.order_id = orderId;
+        }
+
+        const rzp = new Razorpay(options);
+        rzp.on('payment.failed', function (response) {
+            alert("Payment failed: " + response.error.description);
+        });
+        rzp.open();
+    }
+
+    // Poll backend every 3 seconds for payment status
+    function startPaymentPolling() {
+        pollInterval = setInterval(checkStatus, 3000);
+    }
+
+    function checkStatus() {
+        if (!txId) return;
+
+        fetch(`/api/payment/status/${txId}/`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'completed') {
+                    clearInterval(pollInterval);
+                    triggerSuccessPopup();
+                }
+            })
+            .catch(err => console.log('Poll error:', err));
+    }
+
+    function triggerSuccessPopup() {
+        const modal = document.getElementById('successModal');
+        const statusText = document.getElementById('statusText');
+        const pulseDot = document.getElementById('pulseDot');
+
+        if (statusText) statusText.textContent = 'Payment Verified!';
+        if (pulseDot) pulseDot.style.background = '#5cb85c';
+
+        modal.classList.add('active');
+
+        setTimeout(function () {
+            window.location.href = `/payment/success/${memberId}/`;
+        }, 2500);
+    }
+</script>
+{% endblock %}

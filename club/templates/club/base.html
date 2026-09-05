@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The 52 Club — A strength-based community built around discipline, consistency and people. Join weekly sessions and become part of something bigger.">
+
+    <title>{% block title %}The 52 Club | Strength-Based Community{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'club/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+
+    <!-- Navigation -->
+
+    <header class="navbar">
+
+        <a href="{% url 'home' %}" class="logo">
+            <img src="{% static 'club/logo.png' %}" alt="The 52 Club Logo">
+        </a>
+
+        <nav>
+            <a href="{% url 'home' %}#home">Home</a>
+            <a href="{% url 'home' %}#about">About</a>
+            <a href="{% url 'home' %}#events">Events</a>
+            <a href="{% url 'home' %}#gallery">Gallery</a>
+            <a href="{% url 'home' %}#contact">Contact</a>
+            <a href="{% url 'home' %}#register" class="register-btn">Register</a>
+        </nav>
+
+    </header>
+
+    {% block content %}{% endblock %}
+
+    <!-- Footer -->
+
+    <footer>
+
+        <img src="{% static 'club/logo.png' %}" alt="The 52 Club">
+
+        <p>
+            © 2026 The 52 Club. All Rights Reserved.
+        </p>
+
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+
+</html>

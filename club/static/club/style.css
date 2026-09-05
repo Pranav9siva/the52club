@@ -1,0 +1,784 @@
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #000;
+    color: #fff;
+    line-height: 1.5;
+}
+
+
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 15px 60px;
+
+    background: rgba(0, 0, 0, 0.9);
+
+    z-index: 1000;
+}
+
+.logo img {
+    width: 80px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.navbar nav a {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    transition: 0.3s;
+}
+
+.navbar nav a:hover {
+    opacity: 0.5;
+}
+
+.register-btn {
+    border: 1px solid #fff;
+    padding: 12px 20px;
+}
+
+.register-btn:hover {
+    background: #fff;
+    color: #000;
+    opacity: 1 !important;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+
+    padding: 150px 10% 100px;
+
+    background:
+        linear-gradient(rgba(0, 0, 0, 0.45),
+            rgba(0, 0, 0, 0.75)),
+        url('bg.png') center / cover no-repeat;
+}
+
+.hero-content {
+    max-width: 900px;
+}
+
+.hero-small {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 6px;
+
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(70px, 11vw, 160px);
+    line-height: 0.85;
+    font-weight: 900;
+    letter-spacing: -6px;
+
+    margin-bottom: 40px;
+}
+
+.hero h1 span {
+    -webkit-text-stroke: 2px #fff;
+    color: transparent;
+}
+
+.hero-description {
+    max-width: 500px;
+
+    font-size: 20px;
+    color: #ccc;
+
+    margin-bottom: 40px;
+}
+
+.hero-btn {
+    display: inline-block;
+
+    padding: 17px 30px;
+
+    background: #fff;
+    color: #000;
+
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    transition: 0.3s;
+}
+
+.hero-btn:hover {
+    background: #aaa;
+}
+
+
+/* =========================
+   GENERAL SECTIONS
+========================= */
+
+section {
+    padding: 120px 10%;
+}
+
+.section-label {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 5px;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+
+    background: #111;
+}
+
+.section-title h2,
+.sessions h2,
+.events h2,
+.gallery h2,
+.register h2,
+.contact h2 {
+    font-size: clamp(50px, 7vw, 100px);
+    line-height: 0.9;
+    letter-spacing: -3px;
+    font-weight: 900;
+}
+
+.about-text {
+    padding-top: 50px;
+}
+
+.about-text p {
+    font-size: 20px;
+    color: #bbb;
+
+    margin-bottom: 30px;
+    max-width: 600px;
+}
+
+
+/* =========================
+   SESSIONS
+========================= */
+
+.sessions {
+    background: #000;
+}
+
+.sessions h2 {
+    margin-bottom: 70px;
+}
+
+.session-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.session-card {
+    min-height: 300px;
+
+    padding: 35px;
+
+    border: 1px solid #333;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    transition: 0.3s;
+}
+
+.session-card:hover {
+    background: #fff;
+    color: #000;
+    transform: translateY(-5px);
+}
+
+.session-card span {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.session-card h3 {
+    font-size: 32px;
+}
+
+.session-card p {
+    color: #999;
+    max-width: 300px;
+}
+
+.session-card:hover p {
+    color: #333;
+}
+
+
+/* =========================
+   EVENTS
+========================= */
+
+.events {
+    background: #111;
+}
+
+.events h2 {
+    margin-bottom: 60px;
+}
+
+.event-card {
+    border-top: 1px solid #444;
+    border-bottom: 1px solid #444;
+
+    padding: 35px 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.event-date {
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: #999;
+
+    margin-bottom: 10px;
+}
+
+.event-card h3 {
+    font-size: 28px;
+}
+
+.event-card a {
+    font-weight: bold;
+    border: 1px solid #fff;
+    padding: 12px 20px;
+}
+
+.event-card a:hover {
+    background: #fff;
+    color: #000;
+}
+
+
+/* =========================
+   GALLERY
+========================= */
+
+.gallery {
+    background: #000;
+}
+
+.gallery h2 {
+    margin-bottom: 60px;
+}
+
+.gallery-placeholder {
+    height: 450px;
+
+    border: 1px solid #333;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.gallery-placeholder p {
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 5px;
+}
+
+/* Gallery Grid (Dynamic Images) */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    cursor: pointer;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+    filter: brightness(0.7);
+}
+
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px 20px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover .gallery-caption {
+    transform: translateY(0);
+}
+
+/* Form Errors */
+
+.form-errors {
+    background: #d9534f;
+    color: #fff;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.form-errors p {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-errors ul {
+    list-style: none;
+    padding: 0;
+}
+
+.form-errors li {
+    margin-bottom: 3px;
+}
+
+
+/* =========================
+   REGISTER
+========================= */
+
+.register {
+    text-align: center;
+    background: #fff;
+    color: #000;
+}
+
+.register h2 {
+    margin-bottom: 30px;
+}
+
+.register h2 span {
+    color: #777;
+}
+
+.register>p {
+    font-size: 20px;
+    margin-bottom: 35px;
+}
+
+.register .hero-btn {
+    background: #000;
+    color: #fff;
+}
+
+.register .hero-btn:hover {
+    background: #333;
+}
+
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+
+    background: #111;
+}
+
+.contact-info {
+    padding-top: 50px;
+}
+
+.contact-info p {
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+
+    margin-bottom: 8px;
+}
+
+.contact-info a {
+    display: block;
+
+    font-size: 24px;
+    margin-bottom: 45px;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    padding: 50px 10%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #000;
+
+    border-top: 1px solid #222;
+}
+
+footer img {
+    width: 70px;
+}
+
+footer p {
+    color: #666;
+    font-size: 13px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        height: 75px;
+        padding: 10px 20px;
+    }
+
+    .logo img {
+        width: 65px;
+    }
+
+    .navbar nav {
+        gap: 12px;
+    }
+
+    .navbar nav a {
+        font-size: 10px;
+    }
+
+    .register-btn {
+        padding: 8px 10px;
+    }
+
+    .hero {
+        padding: 130px 25px 80px;
+    }
+
+    .hero h1 {
+        font-size: 70px;
+        letter-spacing: -3px;
+    }
+
+    .hero-description {
+        font-size: 17px;
+    }
+
+    section {
+        padding: 80px 25px;
+    }
+
+    .about,
+    .contact {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .about-text,
+    .contact-info {
+        padding-top: 0;
+    }
+
+    .session-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .session-card {
+        min-height: 250px;
+    }
+
+    .event-card {
+        gap: 20px;
+    }
+
+    .event-card h3 {
+        font-size: 20px;
+    }
+
+    .gallery-placeholder {
+        height: 300px;
+    }
+
+    footer {
+        padding: 35px 25px;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .event-card {
+        grid-template-columns: 40px 1fr;
+        gap: 20px;
+    }
+
+    .event-action {
+        grid-column: 2;
+    }
+
+    .event-details h3 {
+        font-size: 22px;
+    }
+}
+
+/* =========================
+   REGISTRATION FORM
+========================= */
+
+.register-form {
+    max-width: 700px;
+    margin: 60px auto 0;
+    text-align: left;
+}
+
+.register-intro {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+
+    padding: 16px;
+
+    border: 1px solid #999;
+
+    background: #fff;
+    color: #000;
+
+    font-family: inherit;
+    font-size: 16px;
+
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #000;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.submit-btn {
+    width: 100%;
+
+    padding: 18px;
+
+    border: none;
+
+    background: #000;
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.submit-btn:hover {
+    background: #333;
+}
+
+#formMessage {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* =========================
+   EVENTS LIST
+========================= */
+
+.events-list {
+    margin-top: 60px;
+}
+
+.event-card {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    align-items: center;
+    gap: 40px;
+
+    padding: 40px 0;
+
+    border-top: 1px solid #333;
+
+    transition: 0.3s;
+}
+
+.event-card:last-child {
+    border-bottom: 1px solid #333;
+}
+
+.event-card:hover {
+    padding-left: 20px;
+    padding-right: 20px;
+    background: #161616;
+}
+
+.event-number {
+    font-size: 14px;
+    color: #777;
+    font-weight: bold;
+}
+
+.event-date {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.event-details h3 {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.event-description {
+    color: #888;
+    max-width: 550px;
+}
+
+.event-action a {
+    display: inline-block;
+
+    padding: 12px 22px;
+
+    border: 1px solid #fff;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.event-action a:hover {
+    background: #fff;
+    color: #000;
+}
+
+.event-info {
+    display: flex;
+    gap: 30px;
+    margin-top: 25px;
+
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #aaa;
+}
+
+@media (max-width: 768px) {
+
+    .event-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+}

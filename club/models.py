@@ -107,6 +107,30 @@ class GalleryImage(models.Model):
         return self.caption or f"Image #{self.pk}"
 
 
+class Collaborator(models.Model):
+    """Represents a collaborator / partner displayed in the extended footer."""
+    name = models.CharField(
+        max_length=200,
+        help_text='Partner / Collaborator name (e.g., "Cult.fit", "RedBull", "Eden Gardens")'
+    )
+    category = models.CharField(
+        max_length=100,
+        default='COLLABORATIONS',
+        help_text='Column title under which this item is displayed (e.g., "COLLABORATIONS", "PARTNERS", "COMMUNITY")'
+    )
+    url = models.URLField(blank=True, help_text='Optional website or social link')
+    order = models.PositiveIntegerField(default=0, help_text='Lower numbers appear first')
+    is_active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['order', 'name']
+        verbose_name = 'Collaborator'
+        verbose_name_plural = 'Collaborators'
+
+    def __str__(self):
+        return f"{self.name} ({self.category})"
+
+
 class Member(models.Model):
     """Registered members of the club."""
     EXPERIENCE_CHOICES = [

@@ -796,7 +796,7 @@ footer p {
 
 .event-card-v2 {
     background: #141720;
-    border: 1px solid #232838;
+    border: 1px solid #1e1e1e;
     border-radius: 18px;
     padding: 35px;
     position: relative;
@@ -806,7 +806,7 @@ footer p {
 }
 
 .event-card-v2:hover {
-    border-color: #3b4663;
+    border-color: #3a3a3a;
     transform: translateY(-3px);
 }
 
@@ -832,9 +832,9 @@ footer p {
 }
 
 .event-tag-badge {
-    background: #1e2433;
-    border: 1px solid #2d364d;
-    color: #8da4ca;
+    background: #252525;
+    border: 1px solid #1f1f1f;
+    color: #c2c7ce;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 1.5px;
@@ -856,7 +856,7 @@ footer p {
 }
 
 .event-card-desc {
-    color: #98a2b5;
+    color: #b6b8bc;
     font-size: 16px;
     line-height: 1.6;
     max-width: 700px;
@@ -868,7 +868,7 @@ footer p {
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 25px;
-    border: 1px solid #272e42;
+    border: 1px solid #3e3e3f;
 }
 
 .event-card-banner img {
@@ -882,8 +882,8 @@ footer p {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 15px;
-    background: #191d29;
-    border: 1px solid #252b3d;
+    background: #242424;
+    border: 1px solid #1a1a1a;
     border-radius: 14px;
     padding: 22px;
     margin-bottom: 25px;
@@ -898,7 +898,7 @@ footer p {
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 1.5px;
-    color: #61708e;
+    color: #d9d9d9;
     margin-bottom: 6px;
     text-transform: uppercase;
 }
@@ -982,8 +982,283 @@ footer p {
         align-items: stretch;
     }
 
-    .drive-btn, .join-btn {
+    .drive-btn,
+    .join-btn {
         justify-content: center;
         text-align: center;
+    }
+}
+
+
+/* ==========================================
+   HEADER NAVBAR V2 (LEOLIFT STYLE)
+========================================== */
+
+.navbar-v2 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(8, 9, 12, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 30px;
+}
+
+.logo-v2 img {
+    height: 38px;
+    width: auto;
+    display: block;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+}
+
+.nav-menu a {
+    color: #a1a1aa;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.nav-menu a:hover {
+    color: #ffffff;
+}
+
+.header-register-pill {
+    background: #ffffff;
+    color: #000000 !important;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    padding: 10px 24px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: transform 0.2s ease, background 0.2s ease;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.header-register-pill:hover {
+    background: #e4e4e7;
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================
+   EXTENDED FOOTER (STELLAR STYLE)
+========================================== */
+
+.extended-footer {
+    background: #08090c;
+    border-top: 1px solid #1c202d;
+    padding: 80px 8% 40px;
+    color: #94a3b8;
+}
+
+.footer-top-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr;
+    gap: 70px;
+    margin-bottom: 60px;
+}
+
+.footer-block-title {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #f1f5f9;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+.contact-methods {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #11141d;
+    border: 1px solid #1e2434;
+    padding: 16px 22px;
+    border-radius: 14px;
+    text-decoration: none;
+    color: #ffffff;
+    transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.contact-item:hover {
+    border-color: #3b4664;
+    background: #161b27;
+    transform: translateY(-2px);
+}
+
+.contact-icon {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-label {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #64748b;
+    text-transform: uppercase;
+}
+
+.contact-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #f8fafc;
+    margin-top: 2px;
+}
+
+.footer-collaborations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 40px;
+}
+
+.footer-column-title {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #f1f5f9;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #1e2434;
+    padding-bottom: 10px;
+}
+
+.collab-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.collab-list a,
+.collab-list span {
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.collab-list a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.footer-bottom-bar {
+    border-top: 1px solid #181d2a;
+    padding-top: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.footer-brand img {
+    height: 30px;
+    width: auto;
+}
+
+.footer-brand span {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.footer-legal-links {
+    display: flex;
+    gap: 24px;
+}
+
+.footer-legal-links a {
+    color: #64748b;
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.footer-legal-links a:hover {
+    color: #f1f5f9;
+}
+
+@media (max-width: 900px) {
+    .footer-top-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .nav-menu {
+        gap: 20px;
+    }
+
+    .nav-menu a {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-container {
+        padding: 12px 18px;
+    }
+
+    .logo-v2 img {
+        height: 30px;
+    }
+
+    .nav-menu {
+        display: none; /* Mobile menu fallback */
+    }
+
+    .header-register-pill {
+        padding: 8px 18px;
+        font-size: 12px;
+    }
+
+    .extended-footer {
+        padding: 60px 20px 30px;
+    }
+
+    .footer-bottom-bar {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }

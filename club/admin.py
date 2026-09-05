@@ -1,6 +1,27 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import Event, GalleryImage, Member, SiteSettings
+from .models import Event, GalleryImage, Member, SiteSettings, Collaborator
+
+
+# ─────────────────────────────────────────────
+# Collaborator Admin (Extended Footer)
+# ─────────────────────────────────────────────
+
+@admin.register(Collaborator)
+class CollaboratorAdmin(admin.ModelAdmin):
+    list_display = ('name', 'category', 'url', 'order', 'is_active')
+    list_editable = ('category', 'order', 'is_active')
+    list_filter = ('category', 'is_active')
+    search_fields = ('name', 'category')
+    fieldsets = (
+        ('Collaborator Information', {
+            'fields': ('name', 'category', 'url'),
+            'description': '🤝 Add partners/collaborators displayed in the extended footer.'
+        }),
+        ('Display Settings', {
+            'fields': ('is_active', 'order')
+        }),
+    )
 
 
 # ─────────────────────────────────────────────

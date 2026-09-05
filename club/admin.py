@@ -19,6 +19,7 @@ admin.site.index_title = 'Manage Your Club'
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
     list_display = ('event_number', 'title', 'venue', 'date_text', 'time_text', 'collaborations', 'is_active', 'order')
+    list_display_links = ('event_number', 'title')
     list_editable = ('venue', 'is_active', 'order')
     list_filter = ('is_active',)
     search_fields = ('event_number', 'title', 'venue', 'description', 'collaborations')

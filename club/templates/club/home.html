@@ -121,7 +121,7 @@
                     <div class="event-tags-container">
                         {% if event.tags %}
                             {% for tag in event.tags.split %}
-                            <span class="event-tag-badge">{{ tag|cut:","|strip }}</span>
+                            <span class="event-tag-badge">{{ tag|cut:"," }}</span>
                             {% endfor %}
                         {% else %}
                             <span class="event-tag-badge">RUNNING</span>

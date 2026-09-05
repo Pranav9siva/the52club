@@ -18,17 +18,22 @@ admin.site.index_title = 'Manage Your Club'
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    list_display = ('title', 'location', 'date_text', 'time_text', 'is_active', 'order')
-    list_editable = ('location', 'is_active', 'order')
+    list_display = ('event_number', 'title', 'venue', 'date_text', 'time_text', 'collaborations', 'is_active', 'order')
+    list_editable = ('venue', 'is_active', 'order')
     list_filter = ('is_active',)
-    search_fields = ('title', 'location', 'description')
+    search_fields = ('event_number', 'title', 'venue', 'description', 'collaborations')
     fieldsets = (
-        ('Event Details', {
-            'fields': ('title', 'description')
+        ('Event Overview', {
+            'fields': ('event_number', 'tags', 'title', 'description', 'image'),
+            'description': '⚡ Main identity and visual banner for the event.'
         }),
-        ('Schedule & Location', {
-            'fields': ('date_text', 'time_text', 'location'),
-            'description': '⚡ Update the location here before each session!'
+        ('Venue & Schedule', {
+            'fields': ('venue', 'date_text', 'time_text'),
+            'description': '📍 Update the event venue, date, and time here.'
+        }),
+        ('Collaborations & Photos Drive Link', {
+            'fields': ('collaborations', 'google_drive_link'),
+            'description': '🤝 Add collaborators/partners and Google Drive link for event photo gallery.'
         }),
         ('Display Settings', {
             'fields': ('is_active', 'order')

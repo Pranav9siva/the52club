@@ -4,27 +4,53 @@ from django.utils import timezone
 
 
 class Event(models.Model):
-    """Represents a club event/session with editable location."""
-    title = models.CharField(max_length=200, default='THE 52 CLUB SESSION')
+    """Represents a club event/session with editable location, venue, drive link, and metadata."""
+    event_number = models.CharField(
+        max_length=20,
+        default='01',
+        help_text='Event number display (e.g., "01", "02", "SESSION #1")'
+    )
+    tags = models.CharField(
+        max_length=200,
+        blank=True,
+        default='RUNNING, CHALLENGE, COMMUNITY',
+        help_text='Comma-separated tags (e.g., "RUNNING, CHALLENGE, COMMUNITY")'
+    )
+    title = models.CharField(max_length=200, default='SEVEN CHALLENGES — ONE FINISH')
     description = models.TextField(
         blank=True,
-        default='Join us for our weekly strength-based community session. '
-                'Train together, push your limits and get stronger as a community.'
+        default='Seven challenges. One finish. The beginning of the 52 Club.'
+    )
+    image = models.ImageField(
+        upload_to='events/',
+        blank=True,
+        null=True,
+        help_text='Upload event banner/photo'
+    )
+    venue = models.CharField(
+        max_length=300,
+        default='EDEN GARDENS TURF, ANANTAPUR',
+        help_text='Event venue location'
     )
     date_text = models.CharField(
         max_length=100,
-        default='EVERY SUNDAY',
-        help_text='Display text for the date (e.g., "EVERY SUNDAY", "SEP 15, 2026")'
+        default='SUNDAY, 23RD AUGUST',
+        help_text='Display text for the date'
     )
     time_text = models.CharField(
         max_length=50,
-        default='7:00 AM',
+        default='6:30 AM',
         help_text='Display text for the time'
     )
-    location = models.CharField(
-        max_length=300,
-        default='LOCATION ANNOUNCED WEEKLY',
-        help_text='Update this to set the current event location'
+    collaborations = models.CharField(
+        max_length=200,
+        blank=True,
+        default='7 FINISHERS',
+        help_text='Collaborations, partners, or event highlights'
+    )
+    google_drive_link = models.URLField(
+        blank=True,
+        help_text='Google Drive URL for event photos/videos'
     )
     is_active = models.BooleanField(
         default=True,
@@ -43,7 +69,12 @@ class Event(models.Model):
         verbose_name_plural = 'Events'
 
     def __str__(self):
-        return f"{self.title} — {self.location}"
+        return f"#{self.event_number} {self.title} — {self.venue}"
+
+    @property
+    def location(self):
+        """Backward compatibility helper for location."""
+        return self.venue
 
 
 class GalleryImage(models.Model):
